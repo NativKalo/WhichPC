@@ -1,10 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
+import Wizard from './Wizard/Wizard';
+import mockData from './mockData'
 
 function App() {
+  console.log(mockData)
+
   return (
     <div className="App">
-      <h1>WhichPC</h1>
+      <Wizard data={mockData} />
     </div>
   );
 }

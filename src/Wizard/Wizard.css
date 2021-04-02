@@ -1,0 +1,9 @@
+.wizardTitle {
+    padding-top: 90px;
+    font-size:4em;
+}
+
+.Wizard .MuiMobileStepper-root {
+    background: #689098;
+    box-shadow: 0px 4px 12px black;
+}
