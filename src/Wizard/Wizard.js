@@ -4,11 +4,14 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 function Wizard({ data }) {
+
     const [questionIndex, setQuestionIndex] = useState(0);
+    const [sliderValue, setSliderValue] = useState([data.questions[questionIndex].defaultMinValue, data.questions[questionIndex].defaultMaxValue]);
+
 
     const handleNext = () => {
         setQuestionIndex((prevActiveStep) => prevActiveStep + 1);
@@ -18,14 +21,31 @@ function Wizard({ data }) {
         setQuestionIndex((prevActiveStep) => prevActiveStep - 1);
     };
 
+    const handleSliderChange = (event, newValue) => {
+        setSliderValue(newValue);
+    };
+
+    console.log(data.questions[questionIndex])
     return (
         <div className="Wizard">
             <h1 className='wizardTitle'>Which Phone Should I Buy?</h1>
+            <h1 className='questionTitle'>{data.questions[questionIndex].title}</h1>
 
-
-            {data.questions[questionIndex].title}
-
-
+            {data.questions[questionIndex].title === 'Budget' &&
+                <div className='rangeSlider'>
+                    <Typography id="range-slider" gutterBottom>
+                        Price range
+            </Typography>
+                    <Slider
+                        max={data.questions[questionIndex].maxValue}
+                        min={data.questions[questionIndex].minValue}
+                        value={sliderValue}
+                        onChange={handleSliderChange}
+                        valueLabelDisplay="auto"
+                        aria-labelledby="range-slider"
+                    />
+                </div>
+            }
 
             <MobileStepper
                 variant="dots"

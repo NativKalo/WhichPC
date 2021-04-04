@@ -4,7 +4,7 @@ export default
             {
                 title: 'Budget',
                 type: 'range',
-                defaultMinValue: 150,
+                defaultMinValue: 1500,
                 defaultMaxValue: 3500,
                 maxValue: 5000,
                 minValue: 0

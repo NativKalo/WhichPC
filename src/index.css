@@ -20,3 +20,18 @@ body {
 h1{
   margin:0
 }
+.questionTitle{
+  padding-top: 20px;
+  margin:0;
+  font-size:3rem
+}
+
+.rangeSlider{
+  width: 300px;
+  position: relative;
+  left: 40%;
+padding-top: 60px;}
+
+#range-slider{
+  font-size: 3rem;
+}
