@@ -6,6 +6,9 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import { ReactComponent as MyIcon } from "../icons/wifi-router.svg";
+import SvgIcon from '@material-ui/core/SvgIcon';
+
 
 function Wizard({ data }) {
 
@@ -13,11 +16,11 @@ function Wizard({ data }) {
     const [sliderValue, setSliderValue] = useState([data.questions[questionIndex].defaultMinValue, data.questions[questionIndex].defaultMaxValue]);
 
 
-    const handleNext = () => {
+    const handleSliderNext = () => {
         setQuestionIndex((prevActiveStep) => prevActiveStep + 1);
     };
 
-    const handleBack = () => {
+    const handleSliderBack = () => {
         setQuestionIndex((prevActiveStep) => prevActiveStep - 1);
     };
 
@@ -47,26 +50,44 @@ function Wizard({ data }) {
                 </div>
             }
 
+            {data.questions[questionIndex].title === 'What for' &&
+                <div className='multipleSelectDiv'>
+                    {data.questions[questionIndex].options.map((option, index) => {
+                        return (
+                            <span className='multipleSelectIcon'>
+                                <span>
+
+                                    < SvgIcon key={index} className='svg' >
+                                        <MyIcon />
+                                    </SvgIcon>
+                                    <span className='multiSelectText'>{option.name}</span>
+                                </span>
+                            </span>
+                        )
+                    })}
+                </div>}
+
             <MobileStepper
                 variant="dots"
                 steps={data.questions.length}
                 position="bottom"
                 activeStep={questionIndex}
                 nextButton={
-                    <Button size="small" onClick={handleNext} disabled={questionIndex === data.questions.length - 1}>
+                    <Button size="small" onClick={handleSliderNext} disabled={questionIndex === data.questions.length - 1}>
                         Next
           <KeyboardArrowRight />
                     </Button>
                 }
                 backButton={
-                    <Button size="small" onClick={handleBack} disabled={questionIndex === 0}>
+                    <Button size="small" onClick={handleSliderBack} disabled={questionIndex === 0}>
                         <KeyboardArrowLeft />
           Back
         </Button>
                 }
             />
-        </div>
+        </div >
     );
 }
 
 export default Wizard;
+

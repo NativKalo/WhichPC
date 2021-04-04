@@ -18,9 +18,9 @@ export default
                     { name: 'Office', icon: "wifi-router" },
                     { name: 'Code', icon: "wifi-router" },
                     { name: 'Gaming', icon: "wifi-router" },
-                    { name: 'High End Gaming', icon: "wifi-router" },
+                    { name: 'Gaming+', icon: "wifi-router" },
                     { name: 'Studying', icon: "wifi-router" },
-                    { name: 'Video Editing', icon: "wifi-router" },
+                    { name: 'Editing', icon: "wifi-router" },
                 ]
             },
             {
