@@ -14,9 +14,9 @@
     padding: 20px;
 }
 
-/* .rect{
-    fill: blue;
-} */
+.rectClicked{
+    fill: rgb(160, 4, 87);
+}
 
 .multipleSelectDiv{
     width: 700px;
@@ -26,6 +26,7 @@
 }
 
 .multipleSelectIcon{
+    cursor: pointer;
     width: 120px;
     height: 120px;
     margin: 2%;
@@ -39,3 +40,25 @@
 position: relative;
 left: 30%;
 }
+
+.selectDiv .svg{
+    height: 120px;
+    width: 120px;
+    padding: 20px;
+}
+
+.selectIcon{
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    margin: 2%;
+    margin-bottom: 6%;
+    text-align: left;
+    font-family: arial;
+    display: inline-block;
+}
+
+.selectText{
+    position: relative;
+    left: 30%;
+    }

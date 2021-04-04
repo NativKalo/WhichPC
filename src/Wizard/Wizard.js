@@ -9,12 +9,26 @@ import Slider from '@material-ui/core/Slider';
 import { ReactComponent as MyIcon } from "../icons/wifi-router.svg";
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-
 function Wizard({ data }) {
 
-    const [questionIndex, setQuestionIndex] = useState(0);
-    const [sliderValue, setSliderValue] = useState([data.questions[questionIndex].defaultMinValue, data.questions[questionIndex].defaultMaxValue]);
+    const selectMultipleSelectionIcon = (option, index) => {
+        console.log(option)
+        const selectedArray = [...selectedWhatFor]
+        if (selectedArray[index] != true) {
+            selectedArray[index] = true
+        }
+        else {
+            selectedArray[index] = false
+        }
+        setSelectedWhatFor(selectedArray)
+        console.log(selectedArray)
+    }
 
+    const [selectedWhatFor, setSelectedWhatFor] = useState([])
+
+    const [questionIndex, setQuestionIndex] = useState(0);
+
+    const [sliderValue, setSliderValue] = useState([data.questions[questionIndex].defaultMinValue, data.questions[questionIndex].defaultMaxValue]);
 
     const handleSliderNext = () => {
         setQuestionIndex((prevActiveStep) => prevActiveStep + 1);
@@ -54,11 +68,10 @@ function Wizard({ data }) {
                 <div className='multipleSelectDiv'>
                     {data.questions[questionIndex].options.map((option, index) => {
                         return (
-                            <span className='multipleSelectIcon'>
+                            <span onClick={() => selectMultipleSelectionIcon(option.name, index)} className='multipleSelectIcon'>
                                 <span>
-
-                                    < SvgIcon key={index} className='svg' >
-                                        <MyIcon />
+                                    < SvgIcon key={option.name} className='svg' >
+                                        <MyIcon className={(selectedWhatFor[index] ? "rectClicked" : "")} />
                                     </SvgIcon>
                                     <span className='multiSelectText'>{option.name}</span>
                                 </span>
@@ -66,6 +79,40 @@ function Wizard({ data }) {
                         )
                     })}
                 </div>}
+
+            {data.questions[questionIndex].title === 'PC Type' &&
+                <div className='selectDiv'>
+                    {data.questions[questionIndex].options.map((option) => {
+                        return (
+                            <span onClick={() => selectMultipleSelectionIcon(option.name)} className='selectIcon'>
+                                <span>
+                                    < SvgIcon key={option.name} className='svg' >
+                                        <MyIcon />
+                                    </SvgIcon>
+                                    <span className='selectText'>{option.name}</span>
+                                </span>
+                            </span>
+                        )
+                    })}
+                </div>
+            }
+
+            {data.questions[questionIndex].title === 'Size' &&
+                <div className='selectDiv'>
+                    {data.questions[questionIndex].options.map((option) => {
+                        return (
+                            <span onClick={() => selectMultipleSelectionIcon(option.name)} className='selectIcon'>
+                                <span>
+                                    < SvgIcon key={option.name} className='svg' >
+                                        <MyIcon />
+                                    </SvgIcon>
+                                    <span className='selectText'>{option.name}</span>
+                                </span>
+                            </span>
+                        )
+                    })}
+                </div>
+            }
 
             <MobileStepper
                 variant="dots"
