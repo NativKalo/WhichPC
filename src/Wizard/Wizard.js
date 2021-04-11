@@ -71,7 +71,7 @@ function Wizard({ data }) {
                             <span onClick={() => selectMultipleSelectionIcon(option.name, index)} className='multipleSelectIcon'>
                                 <span>
                                     < SvgIcon key={option.name} className='svg' >
-                                        <MyIcon className={(selectedWhatFor[index] ? "rectClicked" : "")} />
+                                        <MyIcon className={"svgIcon " + (selectedWhatFor[index] ? "rectClicked" : "")} />
                                     </SvgIcon>
                                     <span className='multiSelectText'>{option.name}</span>
                                 </span>
