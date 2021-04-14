@@ -1,7 +1,7 @@
 export default {
     questions: [
         {
-            title: "Budget",
+            title: "Price Range",
             type: "range",
             defaultMinValue: 1500,
             defaultMaxValue: 3500,
@@ -10,7 +10,7 @@ export default {
         },
         {
             title: "What for",
-            type: "multiple select",
+            type: "multi",
             options: [
                 { name: "Internet", icon: "wifi-router" },
                 { name: "Movies", icon: "wifi-router" },
@@ -24,7 +24,7 @@ export default {
         },
         {
             title: "PC Type",
-            type: "multiple select",
+            type: "multi",
             options: [
                 { name: "Laptop", icon: "wifi-router" },
                 { name: "Standalone", icon: "wifi-router" },
@@ -32,7 +32,7 @@ export default {
         },
         {
             title: "Size",
-            type: "multiple select",
+            type: "multi",
             options: [
                 { name: "Small", icon: "wifi-router" },
                 { name: "Medium", icon: "wifi-router" },

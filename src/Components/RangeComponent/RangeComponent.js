@@ -12,9 +12,7 @@ function RangeComponent({ title, defaultMinValue, defaultMaxValue, maxValue, min
 
     return (
         <div className="rangeSlider">
-            <Typography id="range-slider" gutterBottom>
-                {title}
-            </Typography>
+
             <div className="rangeSliderInput">
                 <Slider
                     max={maxValue}

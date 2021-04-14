@@ -1,0 +1,60 @@
+.multipleSelectDiv .svg {
+    height: 90px;
+    width: 90px;
+    padding: 20px;
+}
+
+.rectClicked {
+    fill: rgb(160, 4, 87);
+}
+
+.multipleSelectDiv {
+    transition: all 0.5s;
+    width: 700px;
+    position: relative;
+    padding-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.multipleSelectIcon {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    margin: 2%;
+    margin-bottom: 6%;
+    text-align: left;
+    font-family: arial;
+    display: inline-block;
+}
+
+.multiSelectText {
+    position: relative;
+    text-align: center;
+    display: block;
+}
+
+.selectDiv .svg {
+    height: 120px;
+    width: 120px;
+    padding: 20px;
+}
+
+.selectIcon {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    margin: 2%;
+    margin-bottom: 6%;
+    text-align: left;
+    font-family: arial;
+    display: inline-block;
+}
+
+.selectText {
+    position: relative;
+}
+
+.svgIcon {
+    transition: all 0.5s;
+}
