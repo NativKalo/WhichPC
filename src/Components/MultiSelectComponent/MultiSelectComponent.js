@@ -3,9 +3,9 @@ import "./MultiSelectComponent.css";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { ReactComponent as MyIcon } from "../../icons/wifi-router.svg";
 
-function MultipleSelectComponent({ options }) {
+function MultipleSelectComponent({ title, options, saveComponentData, componentData }) {
 
-    const [selectedWhatFor, setSelectedWhatFor] = useState([]);
+    const [selectedWhatFor, setSelectedWhatFor] = useState(componentData[title] || []);
 
     const selectMultipleSelectionIcon = (option, index) => {
         console.log(option);
@@ -17,12 +17,13 @@ function MultipleSelectComponent({ options }) {
         }
         setSelectedWhatFor(selectedArray);
         console.log(selectedArray);
+        saveComponentData(selectedArray, title)
     };
     return (
         <div className="multipleSelectDiv">
             {options.map((option, index) => {
                 return (
-                    <span
+                    <span key={index}
                         onClick={() => selectMultipleSelectionIcon(option.name, index)}
                         className="multipleSelectIcon">
                         <span>

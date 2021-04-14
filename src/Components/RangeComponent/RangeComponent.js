@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./RangeComponent.css";
-import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 
-function RangeComponent({ title, defaultMinValue, defaultMaxValue, maxValue, minValue }) {
+function RangeComponent({ title, defaultMinValue, defaultMaxValue, maxValue, minValue, saveComponentData, componentData }) {
+
     const handleSliderChange = (event, newValue) => {
         setSliderValue(newValue);
+        saveComponentData(newValue, title)
     };
 
-    const [sliderValue, setSliderValue] = useState([defaultMinValue, defaultMaxValue]);
+    const [sliderValue, setSliderValue] = useState(componentData[title] || [defaultMinValue, defaultMaxValue]);
 
     return (
         <div className="rangeSlider">

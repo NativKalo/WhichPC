@@ -14,6 +14,13 @@ const typeToComponent = {
 
 function Wizard({ data }) {
 
+    const [componentData, setComponentData] = useState({});
+
+    const saveComponentData = (value, title) => {
+        const data = { ...componentData, [title]: value }
+        setComponentData(data)
+    }
+
     const [questionIndex, setQuestionIndex] = useState(0);
 
     const handleSliderNext = () => {
@@ -31,7 +38,7 @@ function Wizard({ data }) {
             <h1 className="wizardTitle">Which Phone Should I Buy?</h1>
             <h1 className="questionTitle">{data.questions[questionIndex].title}</h1>
 
-            {Component ? <Component {...data.questions[questionIndex]} key={data.questions[questionIndex].title} /> : null}
+            {Component ? <Component {...data.questions[questionIndex]} componentData={componentData} saveComponentData={saveComponentData} key={data.questions[questionIndex].title} /> : null}
             <MobileStepper
                 variant="dots"
                 steps={data.questions.length}
