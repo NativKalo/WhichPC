@@ -67,3 +67,13 @@ left: 30%;
 .svgIcon{
     transition: all 0.5s;  
 }
+.rangeSliderInput{
+    padding-top:20px;
+}
+.rangeSlider{
+    width: 300px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 60px;
+}

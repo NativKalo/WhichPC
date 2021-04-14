@@ -52,15 +52,16 @@ function Wizard({ data }) {
                 <div className='rangeSlider'>
                     <Typography id="range-slider" gutterBottom>
                         Price range
-            </Typography>
-                    <Slider
-                        max={data.questions[questionIndex].maxValue}
-                        min={data.questions[questionIndex].minValue}
-                        value={sliderValue}
-                        onChange={handleSliderChange}
-                        valueLabelDisplay="auto"
-                        aria-labelledby="range-slider"
-                    />
+            </Typography ><div className='rangeSliderInput'>
+                        <Slider
+                            max={data.questions[questionIndex].maxValue}
+                            min={data.questions[questionIndex].minValue}
+                            value={sliderValue}
+                            onChange={handleSliderChange}
+                            valueLabelDisplay="on"
+                            aria-labelledby="range-slider"
+                        />
+                    </div>
                 </div>
             }
 
