@@ -1,6 +1,6 @@
 .wizardTitle {
     padding-top: 90px;
-    font-size:4em;
+    font-size: 4em;
 }
 
 .Wizard .MuiMobileStepper-root {
@@ -8,17 +8,17 @@
     box-shadow: 0px 4px 12px black;
 }
 
-.multipleSelectDiv .svg{
+.multipleSelectDiv .svg {
     height: 90px;
     width: 90px;
     padding: 20px;
 }
 
-.rectClicked{
+.rectClicked {
     fill: rgb(160, 4, 87);
 }
 
-.multipleSelectDiv{
+.multipleSelectDiv {
     transition: all 0.5s;
     width: 700px;
     position: relative;
@@ -26,7 +26,7 @@
     padding-top: 20px;
 }
 
-.multipleSelectIcon{
+.multipleSelectIcon {
     cursor: pointer;
     width: 120px;
     height: 120px;
@@ -37,18 +37,18 @@
     display: inline-block;
 }
 
-.multiSelectText{
-position: relative;
-left: 30%;
+.multiSelectText {
+    position: relative;
+    left: 30%;
 }
 
-.selectDiv .svg{
+.selectDiv .svg {
     height: 120px;
     width: 120px;
     padding: 20px;
 }
 
-.selectIcon{
+.selectIcon {
     cursor: pointer;
     width: 150px;
     height: 150px;
@@ -59,21 +59,11 @@ left: 30%;
     display: inline-block;
 }
 
-.selectText{
+.selectText {
     position: relative;
     left: 30%;
-    }
+}
 
-.svgIcon{
-    transition: all 0.5s;  
-}
-.rangeSliderInput{
-    padding-top:20px;
-}
-.rangeSlider{
-    width: 300px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 60px;
+.svgIcon {
+    transition: all 0.5s;
 }
