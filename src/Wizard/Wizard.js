@@ -19,6 +19,7 @@ function Wizard({ data }) {
     const saveComponentData = (value, title) => {
         const data = { ...componentData, [title]: value }
         setComponentData(data)
+        console.log(data)
     }
 
     const [questionIndex, setQuestionIndex] = useState(0);
