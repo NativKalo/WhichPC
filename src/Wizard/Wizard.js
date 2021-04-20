@@ -14,7 +14,12 @@ const typeToComponent = {
 
 function Wizard({ data }) {
 
+
     const [componentData, setComponentData] = useState({});
+
+    const setComponentBackground = (bg) => {
+        setImageBackground(bg)
+    }
 
     const saveComponentData = (value, title) => {
         const data = { ...componentData, [title]: value }
@@ -22,24 +27,34 @@ function Wizard({ data }) {
         console.log(data)
     }
 
+    const [imageBackground, setImageBackground] = useState()
+
     const [questionIndex, setQuestionIndex] = useState(0);
 
     const handleSliderNext = () => {
         setQuestionIndex((prevActiveStep) => prevActiveStep + 1);
+        setImageBackground(imageBackground)
     };
 
     const handleSliderBack = () => {
         setQuestionIndex((prevActiveStep) => prevActiveStep - 1);
+        setImageBackground(imageBackground)
     };
-
+    console.log(imageBackground)
     console.log(data.questions[questionIndex]);
+    console.log(componentData)
     const Component = typeToComponent[data.questions[questionIndex].type];
     return (
-        <div className="Wizard">
-            <h1 className="wizardTitle">Which Phone Should I Buy?</h1>
-            <h1 className="questionTitle">{data.questions[questionIndex].title}</h1>
-
-            {Component ? <Component {...data.questions[questionIndex]} componentData={componentData} saveComponentData={saveComponentData} key={data.questions[questionIndex].title} /> : null}
+        <div className="Wizard" style={{
+            backgroundImage: `url(${imageBackground})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
+        }}><div className='titlesDiv'>
+                {questionIndex === 0 && <h1 className="wizardTitle">Which Phone Should I Buy?</h1>}
+                <h1 className="questionTitle">{data.questions[questionIndex].title}</h1>
+            </div>
+            {Component ? <Component {...data.questions[questionIndex]} setComponentBackground={setComponentBackground} componentData={componentData} saveComponentData={saveComponentData} key={data.questions[questionIndex].title} /> : null}
             <MobileStepper
                 variant="dots"
                 steps={data.questions.length}
