@@ -4,7 +4,7 @@ import selfies from './media/stockPhone3.jpg'
 import battery from './media/stockPhone4.jpg'
 import mobileGames from './media/stockPhone5.jpg'
 import apple from './media/stockPhone6.jpg'
-
+import lastPic from './media/stockPhone7.jpg'
 
 export default {
 
@@ -42,7 +42,7 @@ export default {
 
         },
         {
-            title: "How important is the Battery Capacity To you?",
+            title: "How important is Battery Capacity To you?",
             type: "multi",
             options: [
                 { name: "Very Important", icon: "wifi-router" },
@@ -74,5 +74,10 @@ export default {
             bg: apple
 
         },
+        {
+            title: "Conclusion",
+            type: "conclusion",
+            bg: lastPic
+        }
     ],
 };

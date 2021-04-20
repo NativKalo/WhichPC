@@ -10,22 +10,12 @@
 
 .multipleSelectDiv {
     transition: all 0.5s;
-    width: 700px;
+    width: 400px;
+    height: 400px;
     position: relative;
-    padding-top: 20px;
+    padding-top: 120px;
     left: 50%;
     transform: translateX(-50%);
-}
-
-.multipleSelectIcon {
-    /* cursor: pointer; */
-    width: 120px;
-    height: 120px;
-    margin: 2%;
-    margin-bottom: 6%;
-    text-align: left;
-    font-family: arial;
-    display: inline-block;
 }
 
 .multiSelectText {
@@ -58,3 +48,20 @@
 .svgIcon {
     transition: all 0.5s;
 }
+.selectButton{
+        /* display:inline-block; */
+        padding:0.5em 3em;
+        font-size: large;
+        border:0.16em solid #bbc788;
+        margin: 2%;
+        box-sizing: border-box;
+        text-decoration:none;
+        text-transform:uppercase;
+        font-family:'Roboto',sans-serif;
+        font-weight:400;
+        color:#b1af47;
+        border-radius: 12px;
+        text-align:center;
+        background-color:rgba(104, 101, 101, 0.9);
+        width: 280px;
+      }

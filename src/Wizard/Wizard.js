@@ -6,16 +6,18 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import RangeComponent from "../Components/RangeComponent/RangeComponent";
 import MultipleSelectComponent from "../Components/MultiSelectComponent/MultiSelectComponent";
+import ConclusionComponent from '../Components/ConclusionComponent/ConclusionComponent'
 
 const typeToComponent = {
     range: RangeComponent,
-    multi: MultipleSelectComponent
+    multi: MultipleSelectComponent,
+    conclusion: ConclusionComponent
 };
 
 function Wizard({ data }) {
 
 
-    const [componentData, setComponentData] = useState({});
+    const [componentData, setComponentData] = useState({ "Price Range": [1500, 3500] });
 
     const setComponentBackground = (bg) => {
         setImageBackground(bg)
@@ -54,23 +56,23 @@ function Wizard({ data }) {
                 {questionIndex === 0 && <h1 className="wizardTitle">Which Phone Should I Buy?</h1>}
                 <h1 className="questionTitle">{data.questions[questionIndex].title}</h1>
             </div>
-            {Component ? <Component {...data.questions[questionIndex]} setComponentBackground={setComponentBackground} componentData={componentData} saveComponentData={saveComponentData} key={data.questions[questionIndex].title} /> : null}
+            {Component ? <Component {...data.questions[questionIndex]} handleSliderNext={handleSliderNext} setComponentBackground={setComponentBackground} componentData={componentData} saveComponentData={saveComponentData} key={data.questions[questionIndex].title} /> : null}
             <MobileStepper
                 variant="dots"
                 steps={data.questions.length}
                 position="bottom"
                 activeStep={questionIndex}
-                nextButton={
-                    <Button
-                        size="small"
-                        onClick={handleSliderNext}
-                        disabled={questionIndex === data.questions.length - 1}>
-                        Next
-                        <KeyboardArrowRight />
-                    </Button>
-                }
+                // nextButton={
+                //     <Button
+                //         size="small"
+                //         onClick={handleSliderNext}
+                //         disabled={questionIndex === data.questions.length - 1}>
+                //         Next
+                //         <KeyboardArrowRight />
+                //     </Button>
+                // }
                 backButton={
-                    <Button size="small" onClick={handleSliderBack} disabled={questionIndex === 0}>
+                    <Button size="large" onClick={handleSliderBack} disabled={questionIndex === 0}>
                         <KeyboardArrowLeft />
                         Back
                     </Button>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "./RangeComponent.css";
 import Slider from "@material-ui/core/Slider";
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-function RangeComponent({ title, defaultMinValue, defaultMaxValue, maxValue, minValue, saveComponentData, componentData, bg, setComponentBackground }) {
+function RangeComponent({ handleSliderNext, title, defaultMinValue, defaultMaxValue, maxValue, minValue, saveComponentData, componentData, bg, setComponentBackground }) {
 
     useEffect(() => {
         setComponentBackground(bg)
@@ -13,6 +14,24 @@ function RangeComponent({ title, defaultMinValue, defaultMaxValue, maxValue, min
         saveComponentData(newValue, title)
     };
 
+    const muiTheme = createMuiTheme({
+        overrides: {
+            MuiSlider: {
+                thumb: {
+                    color: "yellow",
+                },
+                track: {
+                    color: 'DarkKhaki'
+                },
+                rail: {
+                    color: 'black'
+                },
+                valueLabel: {
+                    color: 'DimGray'
+                }
+            }
+        }
+    });
 
     const [sliderValue, setSliderValue] = useState(componentData[title] || [defaultMinValue, defaultMaxValue]);
 
@@ -20,16 +39,20 @@ function RangeComponent({ title, defaultMinValue, defaultMaxValue, maxValue, min
         <div className="rangeSlider">
 
             <div className="rangeSliderInput">
-                <Slider
-                    max={maxValue}
-                    min={minValue}
-                    value={sliderValue}
-                    onChange={handleSliderChange}
-                    valueLabelDisplay="on"
-                    aria-labelledby="range-slider"
-                />
+                <ThemeProvider theme={muiTheme}>
+                    <Slider
+                        max={maxValue}
+                        min={minValue}
+                        value={sliderValue}
+                        onChange={handleSliderChange}
+                        valueLabelDisplay="on"
+                        aria-labelledby="range-slider"
+                    />
+                </ThemeProvider >
+
             </div>
-        </div>
+            <button className="rangeSelectedButton" onClick={handleSliderNext}>Start Filtering!</button>
+        </div >
     );
 }
 
