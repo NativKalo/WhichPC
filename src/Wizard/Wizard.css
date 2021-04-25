@@ -26,3 +26,9 @@
     left:0px;
     z-index:1000;
 }
+
+@media only screen and (max-width: 421px) {
+    .wizardTitle {
+       display: none;
+    }
+}

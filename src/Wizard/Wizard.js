@@ -7,6 +7,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import RangeComponent from "../Components/RangeComponent/RangeComponent";
 import MultipleSelectComponent from "../Components/MultiSelectComponent/MultiSelectComponent";
 import ConclusionComponent from '../Components/ConclusionComponent/ConclusionComponent'
+import Popup from 'react-animated-popup'
 
 const typeToComponent = {
     range: RangeComponent,
@@ -15,7 +16,6 @@ const typeToComponent = {
 };
 
 function Wizard({ data }) {
-
 
     const [componentData, setComponentData] = useState({ "Price Range": [1500, 3500] });
 
