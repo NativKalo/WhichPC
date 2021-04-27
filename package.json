@@ -42,6 +42,7 @@
         ]
     },
     "devDependencies": {
-        "babel-runtime": "^6.26.0"
+        "babel-runtime": "^6.26.0",
+        "crawler": "^1.3.0"
     }
 }
