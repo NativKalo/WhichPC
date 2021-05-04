@@ -32,6 +32,7 @@ const c = new Crawler({
 
 c.queue('https://www.zap.co.il/models.aspx?sog=e-cellphone');
 
+
 const phoneCrawler = new Crawler({
     rateLimit: 500,
     // This will be called for each crawled page
