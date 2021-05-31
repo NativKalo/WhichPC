@@ -1,4 +1,5 @@
 let connection = require("./connection-wrapper");
+let cameraScores = require('./PuppetPhones')
 const Crawler = require("crawler");
 
 const c = new Crawler({
@@ -13,16 +14,11 @@ const c = new Crawler({
             console.log(error);
         } else {
             console.log("Got it!!!")
-            // res.$('.row.clear').each(function (i, elem) {
-            //     console.log(res.$(elem).find('.bar.block').html())
-            //     console.log(res.$(elem).find('.bar.block').next().html())
-            // });
-            res.$('.row.clear .benchmark_searchable .name.name2').each(function (i, elem) {
+            res.$('.benchmark_topaccordeon > li:nth-child(2) .row.clear .benchmark_searchable .name.name2').each(function (i, elem) {
                 console.log(res.$(elem).html())
                 phonesArray.push(res.$(elem).html())
-
             });
-            res.$('.row.clear .score .bar.block').each(function (i, elem) {
+            res.$('.benchmark_topaccordeon > li:nth-child(2) .row.clear .score .bar.block').each(function (i, elem) {
                 if (res.$(elem).css('background-color') === '#FFCC51') {
                     let score = res.$(elem).children().text()
                     if (score === '') {
@@ -33,18 +29,23 @@ const c = new Crawler({
                         scoresArray.push(score.trim())
                     }
                 }
-                // else {
-                //     console.log("n")
-                // }
             });
         }
 
         console.log(phonesArray)
         console.log(scoresArray)
+        phonesCleanUp()
         insertPhonesToDB(phonesArray, scoresArray)
+        cameraScores.puppetCameraScores(phonesArray)
         done();
     }
 });
+
+async function phonesCleanUp() {
+    let sql = 'TRUNCATE TABLE ranks;'
+    await connection.execute(sql);
+
+}
 
 async function insertPhonesToDB(phones, scores) {
     for (let i = 0; i < phones.length; i++) {
