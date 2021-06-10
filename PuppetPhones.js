@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+const puppeteer = require("puppeteer");
 const Crawler = require("crawler");
 let connection = require("./connection-wrapper");
 
@@ -7,27 +7,33 @@ async function puppetCameraScores(phones) {
     const page = await browser.newPage();
     for (let i = 0; i < phones.length; i++) {
         let key_words = phones[i];
-        const link = 'https://www.phonearena.com/';
+        const link = "https://www.phonearena.com/";
 
         try {
-
             await page.setDefaultNavigationTimeout(0);
 
             await page.setViewport({ width: 1199, height: 900 });
 
             await page.goto(link);
 
-            await page.waitForSelector('.widgetHeader__search>form .form-group');
+            await page.waitForSelector(".widgetHeader__search>form .form-group");
 
-            await page.click('.widgetHeader__search>form .form-group');
+            await page.click(".widgetHeader__search>form .form-group");
 
             await page.keyboard.type(key_words);
 
-            await page.keyboard.press('Enter');
+            await page.keyboard.press("Enter");
 
-            await page.waitForSelector('.widget-tilePhoneCard a')
+            await page.waitForSelector(".widget-tilePhoneCard a");
 
-            const url = await page.evaluate((key_words) => { return document.querySelector(`img[alt="${key_words}"]`).parentElement.parentElement.getAttribute('href') }, key_words)
+            const url = await page.evaluate((key_words) => {
+                if (document.querySelector(`img[alt="${key_words}"]`) === null) {
+                    return;
+                }
+                return document
+                    .querySelector(`img[alt="${key_words}"]`)
+                    .parentElement.parentElement.getAttribute("href");
+            }, key_words);
 
             var c = new Crawler({
                 maxConnections: 10,
@@ -35,29 +41,33 @@ async function puppetCameraScores(phones) {
                     if (error) {
                         console.log(error);
                     } else {
-                        res.$('.widgetSpecs > *:nth-child(7) tr:nth-child(2) td').each(function (i, elem) {
-                            console.log(res.$(elem).html())
-                            console.log(key_words)
-                            insertCameraScoreToDB(key_words, res.$(elem).html())
+                        res.$(".widgetSpecs > *:nth-child(7) tr:nth-child(2) td").each(function (i, elem) {
+                            console.log(res.$(elem).html());
+                            console.log(key_words);
+                            insertCameraScoreToDB(key_words, res.$(elem).html());
                         });
-                        res.$('.widgetSpecs > *:nth-child(5) tr:nth-child(1) td').each(function (i, elem) {
+                        res.$(".widgetSpecs > *:nth-child(5) tr:nth-child(1) td").each(function (i, elem) {
                             // console.log(res.$(elem).html())
                             // console.log(key_words)
-                            insertBatteryScoreToDB(key_words, res.$(elem).html())
+                            insertBatteryScoreToDB(key_words, res.$(elem).html());
                         });
-                        for (i of res.$('.widgetSpecs > *:nth-child(7) tbody > tr td').html()) {
-
-                            console.log(i)
-
-                        }
-                        // res.$('.widgetSpecs > *:nth-child(7) tr:nth-child(10) td').each(function (i, elem) {
-                        //     insertSelfieCameraScoreToDB(key_words, res.$(elem).html())
-                        // });
+                        let phoneSpecs = {};
+                        res.$(".widgetSpecs > *:nth-child(7) tbody > tr").each(function (i, elem) {
+                            let children = res.$(elem).children();
+                            let innerCameraText = children.eq(0).text().trim();
+                            let innerCameraSpec = children.eq(1).text().trim();
+                            phoneSpecs[innerCameraText] = innerCameraSpec;
+                        });
+                        console.log(phoneSpecs);
                     }
                     done();
-                }
+                },
             });
-            c.queue(url);
+            if (url) {
+                c.queue(url);
+            } else {
+                console.log(`Phone Not Found: '${key_words}'`);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -68,29 +78,26 @@ async function puppetCameraScores(phones) {
 }
 
 const getHref = (page, selector) =>
-    page.evaluate(
-        selector => document.querySelector(selector).getAttribute('href'),
-        selector
-    );
+    page.evaluate((selector) => document.querySelector(selector).getAttribute("href"), selector);
 
 const insertCameraScoreToDB = async (phone, cameraScore) => {
     let sql = `INSERT INTO rearcamspecs (phone_name,phone_camera_score)  values(?,?)`;
     let parameters = [phone, cameraScore];
     insertPhone = await connection.executeWithParameters(sql, parameters);
-}
+};
 
 const insertBatteryScoreToDB = async (phone, batteryscore) => {
     let sql = `INSERT INTO batteryspecs (phone_name,phone_battery_capacity)  values(?,?)`;
     let parameters = [phone, batteryscore];
     insertPhone = await connection.executeWithParameters(sql, parameters);
-}
+};
 
 const insertSelfieCameraScoreToDB = async (phone, cameraScore) => {
     let sql = `INSERT INTO selfiecamspecs (phone_name,phone_camera_score)  values(?,?)`;
     let parameters = [phone, cameraScore];
     insertPhone = await connection.executeWithParameters(sql, parameters);
-}
+};
 
 module.exports = {
-    puppetCameraScores
-}
+    puppetCameraScores,
+};
